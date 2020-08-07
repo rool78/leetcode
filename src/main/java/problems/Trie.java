@@ -7,7 +7,7 @@ public class Trie {
 
     public static void main(String[] args) {
         String a = "hola";
-        System.out.println(a.substring(1));
+
     }
 
     public static void insert(String word) {
