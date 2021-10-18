@@ -3,7 +3,7 @@ package problems.twopointer;
 //Basic two pointers
 public class TwoSum {
 
-    static int[] arr = {2,3,4};
+    static int[] arr = {2,3,5,4,10};
     static int target = 6;
 
     public static void main(String[] args) {
@@ -16,21 +16,17 @@ public class TwoSum {
 
     public static int[] twoSum(int[] nums, int target) {
         int left = 0;
-        int right = nums.length - 1;
+        int right = nums.length -1;
         while (left <= right) {
-            int currentSum = nums[left] + nums[right];
-            if (currentSum < target) {
-                if (nums[left + 1] + nums[right] > currentSum) {
-                    left += 1;
-                }
-            } else if (currentSum > target) {
-                if (nums[left] + nums[right - 1] < currentSum) {
-                    right -= 1;
-                }
+            if (target == nums[left] + nums[right]) {
+                return new int[] {left + 1, right + 1};
+            }
+            if (target > nums[left] + nums[right]) {
+                left++;
             } else {
-                return new int[] {left, right};
+                right--;
             }
         }
-        return new int[] {right, left};
+        return new int[] {-1,-1};
     }
 }
