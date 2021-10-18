@@ -22,38 +22,39 @@ rotate 2 steps to the right: [3,99,-1,-100]
 
 public class RotateArray {
 
-    static int[] arr = {1, 2, 3, 4, 5, 6, 7};
+    static int[] input = {1, 2, 3, 4, 5, 6, 7};
     static int k = 3;
 
     public static void main(String[] args) {
-        rotate(arr, k);
-        System.out.println();
-        for (int i: arr) {
+        for (int i : input) {
             System.out.print(" " + i);
         }
+        System.out.println();
+        rotate(input, k);
+        for (int i : input) {
+            System.out.print(" " + i);
+        }
+
     }
-//  O(n^2)
+
     public static void rotate(int[] nums, int k) {
+        if (nums.length < 1) {
+            return;
+        }
         int[] out = new int[nums.length];
+        int outIndex = 0;
+        int trick = k % nums.length; //el truco para obtener la cantidad de numero que tienen que ir al principio del array
 
-        //brute force
-        for (int i = 0; i < k; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                if (j == nums.length - 1) {
-                    out[0] = nums[nums.length - 1];
-                } else {
-                    out[j + 1] = nums[j];
-                }
-            }
-            nums = out.clone();
+        for (int i = nums.length - trick; i < nums.length; i++) {
+            out[outIndex++] = nums[i];
+        }
+        for (int i = 0; i < nums.length - trick; i++) {
+            out[outIndex++] = nums[i];
+        }
+        for (int i = 0; i < out.length; i++) {
+            nums[i] = out[i];
         }
 
-        nums = out;
-
-        System.out.println();
-        for (int i: out) {
-            System.out.print(" " + i);
-        }
     }
 
 }

@@ -20,14 +20,24 @@ Follow up: Could you minimize the total number of operations done?
  */
 public class MoveZeroes {
 
-    static int[] in = {0,1,0,3,12};
+    static int[] in = {0, 1, 0, 3, 12};
 
     public static void main(String[] args) {
-
+        moveZeroes(in);
     }
 
     public static void moveZeroes(int[] nums) {
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
 
+        for (int i = index; i < nums.length; i++) {
+            nums[i] = 0;
+        }
     }
-
 }
+
