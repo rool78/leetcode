@@ -16,6 +16,6 @@ public class Q1 {
         for (int i = 1; i <= D; i++) {
             
         }
-
+        return null;
     }
 }
