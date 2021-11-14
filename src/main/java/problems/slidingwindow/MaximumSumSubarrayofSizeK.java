@@ -31,6 +31,7 @@ public class MaximumSumSubarrayofSizeK {
         return result;
     }
     // time complexity O(N), space O(1)
+    // Fascinante forma de resolverlo...
     public static int findMaxSumSubArrayOptimal(int k, int[] arr) {
         int maxSum = 0;
         int currentSum = 0;
