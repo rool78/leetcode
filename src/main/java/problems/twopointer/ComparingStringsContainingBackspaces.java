@@ -51,15 +51,12 @@ public class ComparingStringsContainingBackspaces {
             if (backspaces > 0) {
                 p2 -= backspaces;
                 backspaces = 0;
-            } else {
-                p2--;
             }
             if (str1.charAt(p1) != str2.charAt(p2)) {
                 return false;
             }
+            p2--;
         }
-        System.out.println(p1);
-        System.out.println(p2);
         return p1 == p2;
     }
 }
