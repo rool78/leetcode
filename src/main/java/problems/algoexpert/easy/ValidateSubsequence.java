@@ -6,6 +6,7 @@ public class ValidateSubsequence {
 
     public static void main(String[] args) {
 //        System.out.println(isValidSubsequence(Arrays.asList(new int[] {1,2})));
+        int maxValue = Integer.MIN_VALUE;
     }
 
     public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
