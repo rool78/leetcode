@@ -24,7 +24,6 @@ public class TripletSumtoZero {
     //Problema de Grokking, me parece bastante chungo
     public static List<List<Integer>> searchTriplets(int[] arr) {
         List<List<Integer>> triplets = new ArrayList<>();
-        // TODO: Write your code here
         return triplets;
     }
 

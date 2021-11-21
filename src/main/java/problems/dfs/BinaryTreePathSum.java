@@ -26,6 +26,7 @@ public class BinaryTreePathSum {
     }
 
     //Super Smart Solution haha
+    //TODO revisit
     public static boolean hasPathSmart(TreeNode root, int sum) {
         if (root == null)
             return false;
