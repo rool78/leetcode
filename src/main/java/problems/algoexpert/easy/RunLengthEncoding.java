@@ -1,6 +1,6 @@
 package problems.algoexpert.easy;
 
-public class RunLengthEncoding {
+    public class RunLengthEncoding {
 
     public String runLengthEncoding(String string) {
         if (string.isEmpty())
