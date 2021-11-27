@@ -1,42 +1,33 @@
 package problems;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Playground {
 
     public static void main(String[] args) {
-
-    }
-
-    public int[] sortedSquaredArray(int[] array) {
-        int p1 = -1;
-        int p2 = Integer.MAX_VALUE;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] >= 0) {
-                p2 = i;
-                if (p2 - 1 >= 0)
-                    p1 = i - 1;
-            }
+        int [] arr = new int[] {1,1,3,2,3,3};
+        int sol = 0;
+        for (int i : arr) {
+            sol = sol ^ i;
         }
-        if (p2 == Integer.MAX_VALUE)
-            p1 = array.length - 1;
+        System.out.println(sol);
 
-        int[] result = new int[array.length];
-
-        for (int i = 0; i < result.length; i++) {
-            int valLeft = Integer.MAX_VALUE;
-            int valRight = Integer.MAX_VALUE;
-            if (p1 >= 0)
-                valLeft = (int) Math.pow(array[p1], 2);
-            if (p2 < array.length)
-                valRight = (int) Math.pow(array[p2], 2);
-            if (valLeft < valRight) {
-                result[i] = valLeft;
-                p1--;
+        HashMap<Integer, Integer> countMap = new HashMap<>();
+        for (int i : arr) {
+            if (!countMap.containsKey(i)) {
+                countMap.put(i, 1);
             } else {
-                result[i] = valRight;
-                p2++;
+                countMap.put(i, countMap.get(i));
             }
         }
-        return result;
-    }
 
+        Map.Entry<Integer, Integer> majorityEntry = null;
+        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
+            if (majorityEntry == null || entry.getValue() > majorityEntry.getValue()) {
+                majorityEntry = entry;
+            }
+        }
+        System.out.println(majorityEntry.getKey());
+    }
 }

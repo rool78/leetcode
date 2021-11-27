@@ -14,8 +14,9 @@ public class Q1 {
 
         boolean firstMatch = false;
         for (int i = 1; i <= D; i++) {
-            
+
         }
+
         return null;
     }
 }
