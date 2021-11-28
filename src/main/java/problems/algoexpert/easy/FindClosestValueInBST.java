@@ -21,7 +21,25 @@ public class FindClosestValueInBST {
     public static int findClosestValueInBst(BST tree, int target) {
         if (tree == null)
             return -1;
-        int closestValue = Integer.MAX_VALUE;
+        int closestValue = tree.value;
+        BST currentNode = tree;
+        while (currentNode != null) {
+            int currentDistance = Math.abs(target - currentNode.value);
+            if (currentDistance < Math.abs(target - closestValue))
+                closestValue = currentNode.value;
+            if (target < currentNode.value) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+        }
+        return closestValue;
+    }
+
+    public static int findClosestValueInBstBFS(BST tree, int target) {
+        if (tree == null)
+            return -1;
+        int closestValue = tree.value;
         Queue<BST> queue = new LinkedList<>();
         queue.offer(tree);
         while (!queue.isEmpty()) {
@@ -29,14 +47,8 @@ public class FindClosestValueInBST {
             for (int i = 0; i < levelSize; i++) {
                 BST node = queue.remove();
                 int difference = target - node.value;
-                System.out.println("nodo=" + node.value);
-                System.out.println("/////");
-                System.out.println("diferencia=" + difference);
-                System.out.println("closestValue=" + closestValue);
-                if (Math.abs(difference) < Math.abs(target - closestValue)) {
-                    System.out.println("guardamos=" + node.value);
+                if (Math.abs(difference) < Math.abs(target - closestValue))
                     closestValue = node.value;
-                }
                 if (node.left != null)
                     queue.offer(node.left);
                 if (node.right != null)
