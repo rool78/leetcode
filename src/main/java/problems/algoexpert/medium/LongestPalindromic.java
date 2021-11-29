@@ -3,28 +3,26 @@ package problems.algoexpert.medium;
 public class LongestPalindromic {
 
     public static String longestPalindromicSubstring(String str) {
-        if (str.isEmpty())
-            return "";
-
-        String result = String.valueOf(str.charAt(0));
-        
-
-
-
-        return result;
-    }
-
-    public static boolean isPalindrome(String str) {
-        int p1 = 0;
-        int p2 = str.length() - 1;
-        while (p1 < p2) {
-            if (str.charAt(p1) != str.charAt(p2))
-                return false;
-            p1++;
-            p2--;
+        int[] currentLongest = new int[] {0, 1};
+        for (int i = 1; i < str.length(); i++) {
+            int[] odd = getSubstringPalindrome(str, i - 1, i + 1);
+            int[] even = getSubstringPalindrome(str, i - 1, i);
+            int[] longest = odd[1] - odd[0] > even[1] - even[0] ? odd : even;
+            currentLongest = longest[1] - longest[0] > currentLongest[1] - currentLongest[0]
+                    ? longest : currentLongest;
         }
-        return true;
+        return str.substring(currentLongest[0], currentLongest[1]);
     }
 
+    private static int[] getSubstringPalindrome(String str, int left, int right) {
+        while (left >= 0 && right < str.length()) {
+            if (str.charAt(left) != str.charAt(right)) {
+                break;
+            }
+            left++;
+            right--;
+        }
+        return new int[] {left, right - 1};
+    }
 
 }
