@@ -1,4 +1,7 @@
 package problems.slidingwindow;
+
+import java.util.HashSet;
+
 /*
 Given an array of characters where each character represents a fruit tree, you are
 given two baskets, and your goal is to put maximum number of fruits in each basket.
@@ -21,17 +24,31 @@ This can be done if we start with the second letter: ['B', 'C', 'B', 'B', 'C']
  */
 public class FruitsintoBaskets {
 
-    public static int findLength(char[] arr) {
-        int left = 0;
-        int right = 0;
+    public static void main(String[] args) {
+        System.out.println(totalFruit(new int[]{1,2,3,2,2}));
+    }
 
-        int sol = 0;
-        while (right < arr.length) {
-
+    public static int totalFruit(int[] fruits) {
+        HashSet<Integer> set = new HashSet<>();
+        int p1 = 0;
+        int max = 0;
+        int currentMax = 0;
+        for (int p2 = 0; p2 < fruits.length; p2++) {
+            int a = fruits[p1];
+            int b = fruits[p2];
+            currentMax++;
+            if (!set.contains(fruits[p2])) {
+                if (set.size() < 2) {
+                    set.add(fruits[p2]);
+                } else {
+                    max = Math.max(max, currentMax);
+                    set.remove(fruits[p1++]);
+                    p2--;
+                    currentMax = 1;
+                }
+            }
         }
-
-
-        return sol;
+        return Math.max(max, currentMax);
     }
 
 
