@@ -1,33 +1,30 @@
-package problems;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Playground {
 
     public static void main(String[] args) {
-        int [] arr = new int[] {1,1,3,2,3,3};
-        int sol = 0;
-        for (int i : arr) {
-            sol = sol ^ i;
-        }
-        System.out.println(sol);
+//        System.out.println(solve([[1,4],[3,5],[6,9],7,9}}));
+    }
 
-        HashMap<Integer, Integer> countMap = new HashMap<>();
-        for (int i : arr) {
-            if (!countMap.containsKey(i)) {
-                countMap.put(i, 1);
-            } else {
-                countMap.put(i, countMap.get(i));
+    public static int solve(int[][] intervals) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int[] arr : intervals) {
+            for (int i : arr) {
+                map.put(i, map.getOrDefault(i, 0) + 1);
             }
         }
-
-        Map.Entry<Integer, Integer> majorityEntry = null;
-        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
-            if (majorityEntry == null || entry.getValue() > majorityEntry.getValue()) {
-                majorityEntry = entry;
+        int mostFrequentNum = Integer.MAX_VALUE;
+        int frequency = 1;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > frequency) {
+                frequency = entry.getValue();
+                mostFrequentNum = Math.min(mostFrequentNum, entry.getKey());
             }
         }
-        System.out.println(majorityEntry.getKey());
+        return mostFrequentNum;
     }
 }
+
+
+
+
