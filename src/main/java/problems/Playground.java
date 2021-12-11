@@ -1,38 +1,44 @@
 package problems;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Playground {
 
     public static void main(String[] args) {
-        System.out.println(solve(new String[] {"ccd"}
-        , "kndnjdyzfvqocjidqtxjlsust"));
+        System.out.println(solve(new int[] {0,3}));
     }
 
-    public static int solve(String[] words, String letters) {
-        int maxLength = 0;
-        for (String s : words) {
-            int currentLength = getWordLength(s, letters);
-            maxLength = Math.max(maxLength, currentLength);
+    public static int solve(int[] nums) {
+        if (nums.length < 1) {
+            return nums.length;
         }
-        return maxLength;
-    }
-
-    public static int getWordLength(String word, String letters) {
-        Map<Character, Integer> map = new HashMap<>();
-        for (char c : letters.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
-        }
-        for (char c : word.toCharArray()) {
-            if (!map.containsKey(c) || map.get(c) <= 0) {
-                return 0;
+        int s = 0;
+        int max = nums[s];
+        int currentMax = nums[s];
+        for (int e = 1; e < nums.length; e++) {
+            if (currentMax * nums[e] > currentMax) {
+                currentMax *= nums[e];
             } else {
-                map.put(c, map.get(c) - 1);
+                while (s < e) { //shrink
+                    if (nums[s] == 0) {
+                        if (0 > currentMax) {
+                            currentMax = 0;
+                            s++;
+                            break;
+                        }
+                    } else {
+                        if ((currentMax * nums[e]) / nums[s] > currentMax) {
+                            s++;
+                            currentMax = (currentMax * nums[e]) / nums[s];
+                            break;
+                        }
+                        currentMax = (currentMax * nums[e]) / nums[s];
+                    }
+                    s++;
+                }
             }
+            max = Math.max(max, currentMax);
+
         }
-        System.out.println("bingo " + word);
-        return word.length();
+        return Math.max(max, currentMax);
     }
 
 }
