@@ -1,6 +1,6 @@
 package problems.slidingwindow;
 
-import java.util.HashSet;
+import java.util.HashMap;
 
 /*
 Given an array of characters where each character represents a fruit tree, you are
@@ -25,31 +25,25 @@ This can be done if we start with the second letter: ['B', 'C', 'B', 'B', 'C']
 public class FruitsintoBaskets {
 
     public static void main(String[] args) {
-        System.out.println(totalFruit(new int[]{1,2,3,2,2}));
+        System.out.println(totalFruit(new int[]{0,1,6,6,4,4,6}));
     }
 
     public static int totalFruit(int[] fruits) {
-        HashSet<Integer> set = new HashSet<>();
-        int p1 = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int startWindow = 0;
         int max = 0;
-        int currentMax = 0;
-        for (int p2 = 0; p2 < fruits.length; p2++) {
-            int a = fruits[p1];
-            int b = fruits[p2];
-            currentMax++;
-            if (!set.contains(fruits[p2])) {
-                if (set.size() < 2) {
-                    set.add(fruits[p2]);
-                } else {
-                    max = Math.max(max, currentMax);
-                    set.remove(fruits[p1++]);
-                    p2--;
-                    currentMax = 1;
+        for (int endWindow = 0; endWindow < fruits.length; endWindow++) {
+            map.put(fruits[endWindow], map.getOrDefault(fruits[endWindow], 0) + 1);
+            while (map.size() > 2) {
+                map.put(fruits[startWindow], map.getOrDefault(fruits[startWindow], 0) - 1);
+                if (map.get(fruits[startWindow]) == 0) {
+                    map.remove(fruits[startWindow]);
                 }
+                startWindow++;
             }
+            max = Math.max(max, endWindow - startWindow);
         }
-        return Math.max(max, currentMax);
+        return max;
     }
-
 
 }
