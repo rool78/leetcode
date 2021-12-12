@@ -1,44 +1,42 @@
 package problems;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Playground {
 
     public static void main(String[] args) {
-        System.out.println(solve(new int[] {0,3}));
+        System.out.println(solve(new int[] {1,2,5,7,10,13,14,22}));
     }
 
     public static int solve(int[] nums) {
-        if (nums.length < 1) {
-            return nums.length;
+        if (nums.length == 0) {
+            System.out.println("Array vacio");
+            return -1;
         }
-        int s = 0;
-        int max = nums[s];
-        int currentMax = nums[s];
-        for (int e = 1; e < nums.length; e++) {
-            if (currentMax * nums[e] > currentMax) {
-                currentMax *= nums[e];
-            } else {
-                while (s < e) { //shrink
-                    if (nums[s] == 0) {
-                        if (0 > currentMax) {
-                            currentMax = 0;
-                            s++;
-                            break;
-                        }
-                    } else {
-                        if ((currentMax * nums[e]) / nums[s] > currentMax) {
-                            s++;
-                            currentMax = (currentMax * nums[e]) / nums[s];
-                            break;
-                        }
-                        currentMax = (currentMax * nums[e]) / nums[s];
-                    }
-                    s++;
-                }
-            }
-            max = Math.max(max, currentMax);
+        if (nums.length == 1) {
+            System.out.println("base " + nums[0]);
+            return -1;
+        }
+        int mid = nums.length / 2;
+        System.out.println("mid " + nums[mid]);
+        solve(Arrays.copyOfRange(nums, 0, mid));
+        solve(Arrays.copyOfRange(nums, mid + 1, nums.length));
+        return -1;
+    }
 
+    static void test(List<Integer> list) {
+        if (list.size() == 0) {
+            return;
         }
-        return Math.max(max, currentMax);
+        if (list.size() == 1) {
+            System.out.println("base " + list.get(0));
+            return;
+        }
+        int mid = list.size() / 2;
+        test(list.subList(0, mid));
+        System.out.println("mid " + list.get(mid));
+        test(list.subList(mid + 1, list.size()));
     }
 
 }
