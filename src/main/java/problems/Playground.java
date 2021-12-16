@@ -25,6 +25,25 @@ public class Playground {
         return -1;
     }
 
+    public int trap(int[] height) {
+        int l = 0;
+        int r = height.length - 1;
+        int minElevation = 0;
+        int total = 0;
+        while (l < r) {
+            if (height[l] < height[r]) {
+                minElevation = Math.max(minElevation, height[l]);
+                total += minElevation - height[l];
+                l++;
+            } else {
+                minElevation = Math.max(minElevation, height[r]);
+                total += minElevation - height[r];
+                r--;
+            }
+        }
+        return total;
+    }
+
     static void test(List<Integer> list) {
         if (list.size() == 0) {
             return;
