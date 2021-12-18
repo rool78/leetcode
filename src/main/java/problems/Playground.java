@@ -6,6 +6,7 @@ import java.util.List;
 public class Playground {
 
     public static void main(String[] args) {
+        //change
         System.out.println(solve(new int[] {1,2,5,7,10,13,14,22}));
     }
 
