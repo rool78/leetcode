@@ -1,6 +1,34 @@
 package problems.algoexpert.hard;
 
+import java.util.HashMap;
+
 public class FindLoop {
+
+    public static void main(String[] args) {
+        System.out.println(solve("5A"));
+    }
+
+    public static boolean solve(String s) {
+        int l = 0;
+        int r = s.length() - 1;
+        while (l < r) {
+            char a = s.charAt(l);
+            char b = s.charAt(r);
+            while(s.charAt(l) < 'a' || s.charAt(l) > 'z') {
+                l++;
+            }
+            while(s.charAt(r) < 'a' || s.charAt(r) > 'z') {
+                r--;
+            }
+            if (s.charAt(r) != s.charAt(l)) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+
+        return true;
+        }
 
     public static LinkedList findLoop(LinkedList head) {
         LinkedList slow = head;
@@ -37,6 +65,7 @@ public class FindLoop {
         int counter = 0;
         LinkedList p1 = node;
         LinkedList p2 = node;
+        HashMap<Integer, Integer> map = new HashMap<>();
         do {
             counter++;
             p2 = p2.next;

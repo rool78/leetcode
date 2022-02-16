@@ -31,3 +31,37 @@ class kotlin {
     }
 
 }
+
+class ListNode(var value: Int) {
+    var next: ListNode? = null
+}
+
+fun swapPairs(head: ListNode?): ListNode? {
+    val dummy: ListNode? = ListNode(0)
+    dummy?.next = head
+    var prev: ListNode? = dummy
+    var current: ListNode? = head
+
+    while (current != null && current.next != null) {
+        var next: ListNode? = current.next
+        if (current.next != null) {
+            next = current.next?.next
+        }
+        val second = current.next
+
+        //reverse
+        second?.next = current
+        current.next = next
+        prev?.next = second
+
+        //update
+        prev = current
+        current = next
+
+
+    }
+    if (dummy != null) {
+        return dummy.next
+    }
+
+}

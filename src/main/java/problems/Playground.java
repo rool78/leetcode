@@ -1,51 +1,44 @@
 package problems;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-
-public final class Playground {
+public class Playground {
 
     public static void main(String[] args) {
-
-        LinkedHashSet<Integer> s = new LinkedHashSet<>();
-        s.add(1);
-        s.add(1);
-        s.add(2);
-
-        for (int i : s) {
-            System.out.println(i);
-        }
-
-        s.
-
-        int[] arr = s.toArray(new int[0]);
+        System.out.println(solve(new int[] {0,3}));
     }
- final class Cell {
-        int x;
-        int y;
 
-        public Cell(int x, int y) {
-            this.x = x;
-            this.y = y;
+    public static int solve(int[] nums) {
+        if (nums.length < 1) {
+            return nums.length;
         }
+        int s = 0;
+        int max = nums[s];
+        int currentMax = nums[s];
+        for (int e = 1; e < nums.length; e++) {
+            if (currentMax * nums[e] > currentMax) {
+                currentMax *= nums[e];
+            } else {
+                while (s < e) { //shrink
+                    if (nums[s] == 0) {
+                        if (0 > currentMax) {
+                            currentMax = 0;
+                            s++;
+                            break;
+                        }
+                    } else {
+                        if ((currentMax * nums[e]) / nums[s] > currentMax) {
+                            s++;
+                            currentMax = (currentMax * nums[e]) / nums[s];
+                            break;
+                        }
+                        currentMax = (currentMax * nums[e]) / nums[s];
+                    }
+                    s++;
+                }
+            }
+            max = Math.max(max, currentMax);
 
-     @Override
-     public boolean equals(Object o) {
-         if (this == o) return true;
-         if (o == null || getClass() != o.getClass()) return false;
-         Cell cell = (Cell) o;
-         return x == cell.x && y == cell.y;
-     }
-
-     @Override
-     public int hashCode() {
-         return Objects.hash(x, y);
-     }
- }
-
-
-
-
-
+        }
+        return Math.max(max, currentMax);
+    }
 
 }
